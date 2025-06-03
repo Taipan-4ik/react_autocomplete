@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Person } from '../types/Person';
 import { PersonList } from './PersonList';
 import debounce from 'lodash.debounce';
@@ -18,20 +18,21 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   const trimmedQuery = appliedQuery.trim();
 
-  const debouncedSetQuery = useCallback(
+  const debouncedSetQuery = useRef(
     debounce((value: string) => {
       setAppliedQuery(value);
     }, 300),
-    [],
   );
 
   useEffect(() => {
-    debouncedSetQuery(query);
+    const funcDebounce = debouncedSetQuery.current;
+
+    funcDebounce(query);
 
     return () => {
-      debouncedSetQuery.cancel();
+      funcDebounce.cancel();
     };
-  }, [debouncedSetQuery, query]);
+  }, [query]);
 
   return (
     <div className="dropdown is-active">
