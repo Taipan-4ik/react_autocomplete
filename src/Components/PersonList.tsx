@@ -20,13 +20,13 @@ export const PersonList: React.FC<PersonListProps> = ({
       {filteredPeople.length ? (
         <div className="dropdown-menu" role="menu" data-cy="suggestions-list">
           <div className="dropdown-content">
-            {filteredPeople.map((person, index) => {
+            {filteredPeople.map(person => {
               return (
                 <>
                   <div
                     className="dropdown-item"
                     data-cy="suggestion-item"
-                    key={index}
+                    key={person.born / 100}
                   >
                     <p
                       className="has-text-link"
