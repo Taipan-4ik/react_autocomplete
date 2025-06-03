@@ -26,7 +26,7 @@ export const PersonList: React.FC<PersonListProps> = ({
                   <div
                     className="dropdown-item"
                     data-cy="suggestion-item"
-                    key={person.born / 100}
+                    key={Math.floor(Math.random() * 100)}
                   >
                     <p
                       className="has-text-link"
